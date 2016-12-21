@@ -1,0 +1,107 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Site for ...</title>
+  <link rel="stylesheet" href="../mdl-1.2.1/material.min.css">
+</head>
+<body>
+  <div class="mdl-layout mdl-js-layout">
+    <header class="mdl-layout__header">
+      <div class="mdl-layout__header-row">
+        <span class="mdl-layout-title">Site for ...</span>
+        <div class="mdl-layout-spacer"></div>
+        <nav class="mdl-navigation">
+          <a class="mdl-navigation__link" href="../index.html">首页</a>
+          <a class="mdl-navigation__link" href="../course.html">课程</a>
+          <a class="mdl-navigation__link" href="../document.html">文档</a>
+          <a class="mdl-navigation__link" href="../demo.html">演示</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="mdl-layout__content">
+      <div class="mdl-grid">
+        <div class="mdl-cell mdl-cell--12-col">
+          <h6>
+            位置：
+            <a href="index.html">首页</a>
+             /
+            笔试题
+          </h6>
+        </div>
+      </div>
+      <div class="mdl-grid">
+        <div class="mdl-cell mdl-cell--3-col"></div>
+        <div class="mdl-cell mdl-cell--9-col">
+          <h5>运行结果</h5>
+          <textarea cols="80" rows="1">console.log((1 && 2 && 5) || 3)</textarea>
+          <p>首先我们来梳理一下一个概念，请你一定要记住：在js逻辑运算中，0、""、null、false、undefined、NaN 等都会判为 false，其他都为 true。</p>
+          <p>这里顺便提下：看到很多代码 if (!!attr)，为什么不直接写 if (attr)；其实这是一种更严谨的写法：
+请测试 typeof 5和typeof !!5的区别。!!的作用是把一个其他类型的变量转成的bool类型。</p>
+          <p>下面主要讨论下逻辑运算符 && 和 ||。几乎所有语言中 || 和 && 都遵循“短路”原理，如 && 中第一个表达式为假就不会去处理第二个表达式，而 || 正好相反。</p>
+          <p>js 也遵循上述原则。但是比较有意思的是它们返回的值。代码 var attr = true && 4 && “aaa”; 那么运行的结果 attr 就不是简单的 true 或这 false，而是 ”aaa”。再来看看 ||： 代码 var attr = attr || “”; 这个运算经常用来判断一个变量是否已定义，如果没有定义就给他一个初始值，这在给函数的参数定义一个默认值的时候比较有用。因为 js 不像 php 可以直接在型参数上定义 func($attr=5)。再次提醒你记住上面的原则：如果实参需要是0、""、null、false、undefined、NaN 的时候也会当 false 来处理。 </p>
+          <hr />
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="../jquery-1.12.4/jquery.min.js"></script>
+  <script src="../mdl-1.2.1/material.min.js"></script>
+  <script src="../react-15.4.1/react.min.js"></script>
+  <script src="../react-dom-15.4.1/react-dom.min.js"></script>
+  <script src="../babel-6.21.1/babel.min.js"></script>
+
+  <script id="react-hello">
+  // 以<script>形式声明
+  const e = React.createElement
+  ReactDOM.render(
+    e('h1', null, 'Hello, World!'),
+    document.getElementById('hello')
+  )
+  </script>
+
+  <script type="text/babel" id="react-hello-1">
+  // 以<script type="text/babel">形式声明
+  class Hello extends React.Component {
+    render() {
+      return React.createElement('h1', {
+        id: 'h11',
+        className: '1123'
+      }, `Hello ${this.props.text}`);
+    }
+  }
+  ReactDOM.render(
+    // React.createElement(Hello, {text: 'World'}, null),
+    React.createElement(Hello, {text: new Date().toLocaleTimeString()}, null),
+    document.getElementById('hello-1')
+  );
+  </script>
+
+  <script type="text/babel" id="react-timer">
+  // 以<script type="text/babel">形式声明
+  function tick() {
+    const element = (
+      <div>
+        <h2>现在是 {new Date().toLocaleTimeString()}</h2>
+      </div>
+    );
+    ReactDOM.render(
+      element,
+      document.getElementById('timer')
+    );
+  }
+  setInterval(tick, 1000);
+  </script>
+
+  <script>
+  $(function () {
+    $('#code-hello').text($('#react-hello').html())
+    $('#code-hello-1').text($('#react-hello-1').html())
+    $('#code-timer').text($('#react-timer').html())
+  })
+  </script>
+</body>
+</html>
