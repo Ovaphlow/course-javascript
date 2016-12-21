@@ -30,29 +30,41 @@
              /
             <a href="../course.html">课程</a>
              /
-            React
+            React 安装 及 Hello world
           </h6>
         </div>
       </div>
       <div class="mdl-grid">
         <div class="mdl-cell mdl-cell--3-col">
           <ul class="mdl-list">
-            <li class="mdl-list__item"><a href="#hello">Hello</a></li>
-            <li class="mdl-list__item"><a href="#timer">timer</a></li>
+            <li class="mdl-list__item"><a href="#title-install">安装</a></li>
+            <li class="mdl-list__item"><a href="#title-hello">Hello (ES 5)</a></li>
+            <li class="mdl-list__item"><a href="#title-hello-1">Hello (ES 6 & Babel)</a></li>
+            <li class="mdl-list__item"><a href="#title-timer">timer (ES 6 & JSX)</a></li>
           </ul>
         </div>
         <div class="mdl-cell mdl-cell--9-col">
-          <h4>React 基础</h4>
-          <h5>简单用法 (ES 5)</h5>
-          <div id="hello"></div>
-          <textarea id="code-hello" cols="80" rows="7"></textarea>
-          <h5>简单用法 (Babel)</h5>
-          <div id="hello-1"></div>
-          <textarea id="code-hello-1" cols="80" rows="15"></textarea>
+          <h2>React 安装 及 Hello world</h3>
           <hr />
-          <h5>显示动态时间 (Babel & JSX)</h5>
+          <h3 id="title-install">安装 (使用npm)</h3>
+          <textarea cols="80" rows="1">npm install react</textarea>
+          <br />
+          <textarea cols="80" rows="1">npm install react-dom</textarea>
+          <br />
+          <textarea cols="80" rows="1">npm install babel-standalone</textarea>
+          <hr />
+          <h3 id="title-hello">简单用法 (ES 5)</h3>
+          <div id="hello"></div>
+          <textarea id="code-hello" cols="80" rows="8"></textarea>
+          <hr />
+          <h3 id="title-hello-1">简单用法 (Babel & ES6)</h3>
+          <div id="hello-1"></div>
+          <textarea id="code-hello-1" cols="80" rows="16"></textarea>
+          <hr />
+          <h3 id="title-timer">显示动态时间 (Babel & JSX)</h3>
+          <p>在 JavaScript 代码里写着 XML 格式的代码称为 JSX；为了把 JSX 转成标准的 JavaScript，我们用 script type="text/babel" 标签，并引入 Babel 来完成在浏览器里的代码转换。在浏览器里打开这个html，你应该可以看到成功的消息。</p>
           <div id="timer"></div>
-          <textarea id="code-timer" cols="80" rows="14"></textarea>
+          <textarea id="code-timer" cols="80" rows="15"></textarea>
           <hr />
         </div>
       </div>
@@ -65,30 +77,17 @@
   <script src="../react-dom-15.4.1/react-dom.min.js"></script>
   <script src="../babel-6.21.1/babel.min.js"></script>
 
-  <script type="text/babel" id="react-timer">
-  function tick() {
-    const element = (
-      <div>
-        <h2>现在是 {new Date().toLocaleTimeString()}</h2>
-      </div>
-    );
-    ReactDOM.render(
-      element,
-      document.getElementById('timer')
-    );
-  }
-  setInterval(tick, 1000);
-  </script>
-
   <script id="react-hello">
+  // 以<script>形式声明
   const e = React.createElement
   ReactDOM.render(
-    e('h1', null, 'Hello World'),
+    e('h1', null, 'Hello, World!'),
     document.getElementById('hello')
   )
   </script>
 
   <script type="text/babel" id="react-hello-1">
+  // 以<script type="text/babel">形式声明
   class Hello extends React.Component {
     render() {
       return React.createElement('h1', {
@@ -102,6 +101,22 @@
     React.createElement(Hello, {text: new Date().toLocaleTimeString()}, null),
     document.getElementById('hello-1')
   );
+  </script>
+
+  <script type="text/babel" id="react-timer">
+  // 以<script type="text/babel">形式声明
+  function tick() {
+    const element = (
+      <div>
+        <h2>现在是 {new Date().toLocaleTimeString()}</h2>
+      </div>
+    );
+    ReactDOM.render(
+      element,
+      document.getElementById('timer')
+    );
+  }
+  setInterval(tick, 1000);
   </script>
 
   <script>
