@@ -1,0 +1,123 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Site for ...</title>
+  <link rel="stylesheet" href="../mdl-1.2.1/material.min.css">
+</head>
+<body>
+  <div class="mdl-layout mdl-js-layout">
+    <header class="mdl-layout__header">
+      <div class="mdl-layout__header-row">
+        <span class="mdl-layout-title">Site for ...</span>
+        <div class="mdl-layout-spacer"></div>
+        <nav class="mdl-navigation">
+          <a class="mdl-navigation__link" href="../index.html">首页</a>
+          <a class="mdl-navigation__link" href="../course.html">课程</a>
+          <a class="mdl-navigation__link" href="../document.html">文档</a>
+          <a class="mdl-navigation__link" href="../demo.html">演示</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="mdl-layout__content">
+      <div class="mdl-grid">
+        <div class="mdl-cell mdl-cell--12-col">
+          <h6>
+            位置：
+            <a href="index.html">首页</a>
+             /
+            <a href="../course.html">课程</a>
+             /
+            Components and Props （组件与道具）
+          </h6>
+        </div>
+      </div>
+      <div class="mdl-grid">
+        <div class="mdl-cell mdl-cell--3-col">
+          <ul class="mdl-list">
+            <li class="mdl-list__item"><a href="#title-component">定义组件</a></li>
+            <li class="mdl-list__item"><a href="#title-render">渲染组件</a></li>
+            <li class="mdl-list__item"><a href="#title-compose">组合组件</a></li>
+          </ul>
+        </div>
+        <div class="mdl-cell mdl-cell--9-col">
+          <h2 id="title-component">定义组件</h2>
+          <p>定义一个 React 组件最直接的方法</p>
+          <textarea cols="80" rows="4">
+function Welcome(props) {
+  return <h1>Hello, {props.name}</h1>;
+}
+          </textarea>
+          <br />
+          <p>使用 ES6 语法定义一个组件</P>
+          <textarea cols="80" rows="6">
+class Welcome extends React.Component {
+  render() {
+    return <h1>Hello, {this.props.name}</h1>;
+  }
+}
+          </textarea>
+          <hr />
+          <h2 id="title-render">渲染组件</h2>
+          <textarea id="code-render" cols="80" rows="11"></textarea>
+          <p><br />结果</p>
+          <div id="result-render"></div>
+          <hr />
+          <h2 id="title-compose">组合组件</h2>
+          <textarea id="code-compose" cols="80" rows="20"></textarea>
+          <p><br />结果</p>
+          <div id="result-compose"></div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="../jquery-1.12.4/jquery.min.js"></script>
+  <script src="../mdl-1.2.1/material.min.js"></script>
+  <script src="../react-15.4.1/react.min.js"></script>
+  <script src="../react-dom-15.4.1/react-dom.min.js"></script>
+  <script src="../babel-6.21.1/babel.min.js"></script>
+
+  <script id="script-render" type="text/babel">
+  function Welcome(props) {
+    return <h3>Hello, {props.name}</h3>;
+  }
+
+  const element = <Welcome name="刘浪" />;
+  ReactDOM.render(
+    element,
+    document.getElementById('result-render')
+  );
+  </script>
+
+  <script id="script-compose" type="text/babel">
+  function Welcome(props) {
+    return <h3>Hello, {props.name}</h3>;
+  }
+
+  function App() {
+    return (
+      <div>
+        <Welcome name="刘浪" />
+        <Welcome name="老陈" />
+        <Welcome name="罗宁" />
+      </div>
+    );
+  }
+
+  ReactDOM.render(
+    <App />,
+    document.getElementById('result-compose')
+  );
+  </script>
+
+  <script>
+  $(function () {
+    $('#code-render').text($('#script-render').html())
+    $('#code-compose').text($('#script-compose').html())
+  })
+  </script>
+</body>
+</html>

@@ -47,24 +47,25 @@
           <h2>React 安装 及 Hello world</h3>
           <hr />
           <h3 id="title-install">安装 (使用npm)</h3>
-          <textarea cols="80" rows="1">npm install react</textarea>
-          <br />
-          <textarea cols="80" rows="1">npm install react-dom</textarea>
-          <br />
-          <textarea cols="80" rows="1">npm install babel-standalone</textarea>
+          <pre><code>npm install react</code></pre>
+          <pre><code>npm install react-dom</code></pre>
+          <pre><code>npm install babel-standalone</code></pre>
           <hr />
           <h3 id="title-hello">简单用法 (ES 5)</h3>
-          <div id="hello"></div>
           <textarea id="code-hello" cols="80" rows="8"></textarea>
+          <p><br />结果</p>
+          <div id="hello"></div>
           <hr />
           <h3 id="title-hello-1">简单用法 (Babel & ES6)</h3>
-          <div id="hello-1"></div>
           <textarea id="code-hello-1" cols="80" rows="16"></textarea>
+          <p><br />结果</p>
+          <div id="hello-1"></div>
           <hr />
           <h3 id="title-timer">显示动态时间 (Babel & JSX)</h3>
           <p>在 JavaScript 代码里写着 XML 格式的代码称为 JSX；为了把 JSX 转成标准的 JavaScript，我们用 script type="text/babel" 标签，并引入 Babel 来完成在浏览器里的代码转换。在浏览器里打开这个html，你应该可以看到成功的消息。</p>
-          <div id="timer"></div>
           <textarea id="code-timer" cols="80" rows="15"></textarea>
+          <p><br />结果</p>
+          <div id="timer"></div>
           <hr />
         </div>
       </div>
@@ -81,7 +82,7 @@
   // 以<script>形式声明
   const e = React.createElement
   ReactDOM.render(
-    e('h1', null, 'Hello, World!'),
+    e('h3', null, 'Hello, World!'),
     document.getElementById('hello')
   )
   </script>
@@ -90,7 +91,7 @@
   // 以<script type="text/babel">形式声明
   class Hello extends React.Component {
     render() {
-      return React.createElement('h1', {
+      return React.createElement('h3', {
         id: 'h11',
         className: '1123'
       }, `Hello ${this.props.text}`);
@@ -108,7 +109,7 @@
   function tick() {
     const element = (
       <div>
-        <h2>现在是 {new Date().toLocaleTimeString()}</h2>
+        <h3>现在是 {new Date().toLocaleTimeString()}</h3>
       </div>
     );
     ReactDOM.render(

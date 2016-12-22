@@ -1,0 +1,249 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Site for ...</title>
+  <link rel="stylesheet" href="../mdl-1.2.1/material.min.css">
+</head>
+<body>
+  <div class="mdl-layout mdl-js-layout">
+    <header class="mdl-layout__header">
+      <div class="mdl-layout__header-row">
+        <span class="mdl-layout-title">Site for ...</span>
+        <div class="mdl-layout-spacer"></div>
+        <nav class="mdl-navigation">
+          <a class="mdl-navigation__link" href="../index.html">首页</a>
+          <a class="mdl-navigation__link" href="../course.html">课程</a>
+          <a class="mdl-navigation__link" href="../document.html">文档</a>
+          <a class="mdl-navigation__link" href="../demo.html">演示</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="mdl-layout__content">
+      <div class="mdl-grid">
+        <div class="mdl-cell mdl-cell--12-col">
+          <h6>
+            位置：
+            <a href="index.html">首页</a>
+             /
+            <a href="../course.html">课程</a>
+             /
+            State and Lifecycle （状态与生命周期）
+          </h6>
+        </div>
+      </div>
+      <div class="mdl-grid">
+        <div class="mdl-cell mdl-cell--3-col">
+          <ul class="mdl-list">
+            <li class="mdl-list__item"><a href="#title-convert">转换代码</a></li>
+            <li class="mdl-list__item"><a href="#title-add-state">添加状态</a></li>
+            <li class="mdl-list__item"><a href="#title-lifecycle">生命周期</a></li>
+            <li class="mdl-list__item"><a href="#title-final">运行结果</a></li>
+            <li class="mdl-list__item"><a href="#title-state">状态用法</a></li>
+          </ul>
+        </div>
+        <div class="mdl-cell mdl-cell--9-col">
+          <p>
+            以下面的代码为例：<br/>
+            <textarea cols="80" rows="18">
+function Clock(props) {
+  return (
+    <div>
+      <h1>Hello, world!</h1>
+      <h2>It is {props.date.toLocaleTimeString()}.</h2>
+    </div>
+  );
+}
+
+function tick() {
+  ReactDOM.render(
+    <Clock date={new Date()} />,
+    document.getElementById('root')
+  );
+}
+
+setInterval(tick, 1000);
+            </textarea>
+            <br />
+            这是以计时器的方式每秒钟更新显示在页面上的时间，
+            如果我们要让组件本身处理数据的更新，
+            需要对代码做出一些改动。
+            <br />
+            首先，要在 Clock 中添加"state"（状态）。
+          </p>
+          <hr />
+          <h2 id="title-convert">转换代码</h2>
+          <p>
+            为了在 Clock 中添加状态，首先需要将 Clock 从 function 类型转换为 ES6 中的 Class 类型。
+            代码如下：<br />
+            <textarea cols="80" rows="11">
+class Clock extends React.Component {
+  render() {
+    return (
+      <div>
+        <h1>Hello, world!</h1>
+        <h2>It is {this.props.date.toLocaleTimeString()}.</h2>
+      </div>
+    );
+  }
+}
+            </textarea>
+          </p>
+          <hr />
+          <h2 id="title-add-state">添加状态</h2>
+          <p>
+            然后，将 Clock 类中的 props 换成 "state"（状态），代码如下：
+            <textarea cols="80" rows="11">
+class Clock extends React.Component {
+  render() {
+    return (
+      <div>
+        <h1>Hello, world!</h1>
+        <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
+      </div>
+    );
+  }
+}
+            </textarea>
+            <br />
+            接着，为 Clock 类添加一个构造器，来初始化这个 state ：
+            <textarea cols="80" rows="16">
+class Clock extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {date: new Date()};
+  }
+
+  render() {
+    return (
+      <div>
+        <h1>Hello, world!</h1>
+        <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
+      </div>
+    );
+  }
+}
+            </textarea>
+            <br />
+            这样，整个 Clock 组件的代码如下：<br />
+            <textarea cols="80" rows="21">
+class Clock extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {date: new Date()};
+  }
+
+  render() {
+    return (
+      <div>
+        <h1>Hello, world!</h1>
+        <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
+      </div>
+    );
+  }
+}
+
+ReactDOM.render(
+  <Clock />,
+  document.getElementById('root')
+);
+            </textarea>
+            <br />
+            下一步，我们要让 Clock 组件本身来每秒钟更新时间数据。
+          </p>
+          <hr />
+          <h2 id="title-lifecycle">添加生命周期</h2>
+          <p>
+            当 Clock 组件第一次渲染为 DOM 时，需要初始化一个计时器，这个过程在 React 中叫做 "mounting"。<br />
+            当 Clock 组件渲染出来的 DOM 被销毁时，需要清除计时器对象来释放程序所占用的资源，这个过程在 React 中叫做 "unmounting"。<br />
+            这些方法在 React 中叫做 lifecycle hooks。<br />
+            下面，我们为 Clock 组件添加处理 mount 和 unmount 过程的代码：<br />
+            <textarea cols="80" rows="39" id="code-final"></textarea>
+          </p>
+          <hr />
+          <h2 id="title-final">运行结果</h2>
+          <p>
+            最后，这些代码的运行结果如下：<br />
+            <div id="result-final"></div>
+          </p>
+          <hr />
+          <h2 id="title-state">状态用法</h2>
+          <h3>不能直接修改 state</h3>
+          <p>
+            错误的写法：<pre><code>this.state.comment = 'Hello';</code></pre>
+            <br />
+            正确的写法：<pre><code>this.setState({comment: 'Hello'});</code></pre>
+          </p>
+          <br />
+          <h3>更新 state 可能是异步过程</h3>
+          <p>
+            错误的写法：
+            <pre><code>this.setState({
+  counter: this.state.counter + this.proops.increment,
+})
+            </code></pre>
+            正确的写法：
+            <pre><code>this.setState((prevState, props) => ({
+  counter: prevState.counter + props.increment
+}))
+          </code></pre>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="../jquery-1.12.4/jquery.min.js"></script>
+  <script src="../mdl-1.2.1/material.min.js"></script>
+  <script src="../react-15.4.1/react.min.js"></script>
+  <script src="../react-dom-15.4.1/react-dom.min.js"></script>
+  <script src="../babel-6.21.1/babel.min.js"></script>
+
+  <script type="text/babel" id="script-final">
+  class Clock extends React.Component {
+    constructor(props) {
+      super(props);
+      this.state = {date: new Date()};
+    }
+
+    componentDidMount() {
+      this.timerID = setInterval(
+        () => this.tick(),
+        1000
+      )
+    }
+
+    componentWillUnmount() {
+      clearInterval(this.timerID)
+    }
+
+    tick() {
+      this.setState({
+        date: new Date()
+      })
+    }
+
+    render() {
+      return (
+        <div>
+          <h3>Hello, world!</h3>
+          <h4>现在是 {this.state.date.toLocaleTimeString()}.</h4>
+        </div>
+      );
+    }
+  }
+
+  ReactDOM.render(
+    <Clock />,
+    document.getElementById('result-final')
+  )
+  </script>
+
+  <script>
+  $(function () {
+    $('#code-final').text($('#script-final').html())
+  })
+  </script>
+</body>
+</html>
