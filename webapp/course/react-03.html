@@ -1,0 +1,99 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>临安</title>
+  <link rel="stylesheet" href="../mdl-1.2.1/material.min.css">
+</head>
+<body>
+  <div class="mdl-layout mdl-js-layout">
+    <header class="mdl-layout__header">
+      <div class="mdl-layout__header-row">
+        <span class="mdl-layout-title">临安</span>
+        <div class="mdl-layout-spacer"></div>
+        <nav class="mdl-navigation">
+          <a class="mdl-navigation__link" href="../index.html">首页</a>
+          <a class="mdl-navigation__link" href="../course.html">课程</a>
+          <a class="mdl-navigation__link" href="../document.html">文档</a>
+          <a class="mdl-navigation__link" href="../demo.html">演示</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="mdl-layout__content">
+      <div class="mdl-grid">
+        <div class="mdl-cell mdl-cell--12-col">
+          <h6>
+            位置：
+            <a href="index.html">首页</a>
+             /
+            <a href="../course.html">课程</a>
+             /
+            Handling Events （事件处理）
+          </h6>
+        </div>
+      </div>
+      <div class="mdl-grid">
+        <div class="mdl-cell mdl-cell--3-col">
+          <ul class="mdl-list">
+            <li class="mdl-list__item"><a href="#title-switch">开关组件</a></li>
+          </ul>
+        </div>
+        <div class="mdl-cell mdl-cell--9-col">
+          <h2 id="title-switch">开关组件</h2>
+          <textarea id="code-switch" cols="80" rows="30"></textarea>
+          <br />
+          <p>运行的结果为：</p>
+          <div id="result-switch"></div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="../jquery-1.12.4/jquery.min.js"></script>
+  <script src="../mdl-1.2.1/material.min.js"></script>
+  <script src="../react-15.4.1/react.min.js"></script>
+  <script src="../react-dom-15.4.1/react-dom.min.js"></script>
+  <script src="../babel-6.21.1/babel.min.js"></script>
+
+  <script type="text/babel" id="script-switch">
+  class Toggle extends React.Component {
+    constructor(props) {
+      super(props);
+      this.state = {isToggleOn: true};
+      this.handleClick = this.handleClick.bind(this);
+    }
+
+    handleClick() {
+      this.setState(prevState => ({
+        isToggleOn: !prevState.isToggleOn
+      }));
+    }
+
+    render() {
+      return (
+        <button onClick={this.handleClick}
+            className="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">
+          {this.state.isToggleOn ? 'ON' : 'OFF'}
+        </button>
+      );
+    }
+  }
+
+  ReactDOM.render(
+    <Toggle />,
+    document.getElementById('result-switch')
+  );
+  </script>
+
+  <script type="text/babel">
+  </script>
+
+  <script>
+  $(function () {
+    $('#code-switch').text($('#script-switch').html())
+  })
+  </script>
+</body>
+</html>
