@@ -1,0 +1,292 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>临安</title>
+  <link rel="stylesheet" href="../mdl-1.2.1/material.min.css">
+</head>
+<body>
+  <div class="mdl-layout mdl-js-layout">
+    <header class="mdl-layout__header">
+      <div class="mdl-layout__header-row">
+        <span class="mdl-layout-title">临安</span>
+        <div class="mdl-layout-spacer"></div>
+        <nav class="mdl-navigation">
+          <a class="mdl-navigation__link" href="../index.html">首页</a>
+          <a class="mdl-navigation__link" href="../course.html">课程</a>
+          <a class="mdl-navigation__link" href="../document.html">文档</a>
+          <a class="mdl-navigation__link" href="../demo.html">演示</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="mdl-layout__content">
+      <div class="mdl-grid">
+        <div class="mdl-cell mdl-cell--12-col">
+          <h6>
+            位置：
+            <a href="index.html">首页</a>
+             /
+            <a href="../course.html">课程</a>
+             /
+            Conditional Render （条件渲染）
+          </h6>
+        </div>
+      </div>
+      <div class="mdl-grid">
+        <div class="mdl-cell mdl-cell--3-col">
+          <ul class="mdl-list">
+            <li class="mdl-list__item"><a href="#title-element-variables">元素变量</a></li>
+          </ul>
+        </div>
+        <div class="mdl-cell mdl-cell--9-col">
+          <p>
+            React 中的条件渲染与 JavaScript 中的条件判断的工作方式一样。
+            <br />
+            使用 JavaScrip 中的 if 等条件判断代码来创建描述当前状态(State)的元素，并使 React 更新为与之相符的 UI 界面。
+            <br />
+            假设如下两个 React 组件：
+          </p>
+          <textarea cols="80" rows="8">
+function UserGreeting(props) {
+  return <h1>Welcome back!</h1>
+}
+
+function GuestGreeting(props) {
+  return <h1>Please sign up.</h1>
+}
+          </textarea>
+          <br /><br />
+          <p>
+            然后，我们再创建一个名为 Greeting 的组件，并根据用户是否登录来选择上述与之对应的一个组件并显示出来。
+          </p>
+          <textarea cols="80" rows="14">
+function Greeting(props) {
+  const isLoggedIn = props.isLoggedIn
+  if (isLoggedIn) {
+    return <UserGreeting />
+  }
+  return <GuestGreeting />
+}
+
+ReactDOM.render(
+  // <Greeting isLoggedIn={true} />
+  <Greeting isLoggedIn={false} />
+  document.getElementById('result-greeting')
+)
+          </textarea>
+          <br />
+          <h3>结果如下：</h3>
+          <div id="result-greeting"></div>
+          <hr />
+          <h2 id="title-element-variables">元素变量</h2>
+          <textarea cols="80" rows="16">
+function LoginButton(props) {
+  return (
+    <button onClick={props.onClisk}>
+      登录
+    </button>
+  )
+}
+
+function LogoutButton(props) {
+  return (
+    <button onClick={props.onClick}>
+      退出登录
+    </button>
+  )
+}
+          </textarea>
+          <br /><br />
+          <textarea cols="80" rows="38">
+class LoginControl extends React.Component {
+  constructor(props) {
+    super(props)
+    this.handleLoginClick = this.handleLoginClick.bind(this)
+    this.handleLogoutClick = this.handleLogoutClick.bind(this)
+    this.state = {isLoggedIn: false}
+  }
+
+  handleLoginClick() {
+    this.setState({isLoggedIn: true})
+  }
+
+  handleLogoutClick() {
+    this.setState({isLoggedIn: false})
+  }
+
+  render() {
+    const isLoggedIn = this.state.isLoggedIn
+    let button = null
+    if (isLoggedIn) {
+      button = <LogoutButton onClick={this.handleLogoutClick} />
+    } else {
+      button = <LoginButton onClick={this.handleLoginClick} />
+    }
+    return (
+      <div>
+        <Greeting isLoggedIn={isLoggedIn} />
+        {button}
+      </div>
+    )
+  }
+}
+
+ReactDOM.render(
+  <LoginControl />,
+  document.getElementById('result-login-control')
+)
+          </textarea>
+          <h3>输出结果：</h3>
+          <div id="result-login-control"></div>
+          <hr />
+          <h3 id="title-inline-if">带有 && 逻辑操作符的内嵌 if 判断</h3>
+          <textarea cols="80" rows="21" id="code-inline-if"></textarea>
+          <br />
+          输出结果：
+          <div id="result-inline-if"></div>
+          <hr />
+          <h2 id="title-inline-if-else">带有条件操作符的内嵌 if-else 判断</h2>
+          <textarea cols="80" rows="9">
+render () {
+  const isLoggedIn = this.state.isLoggedIn
+  return (
+    <div>
+      The user is <b>{isLoggedIn ? 'currently' : 'not'}</b> logged in.
+    </div>
+  )
+}
+          </textarea>
+          <br /><br />
+          <textarea cols="80" rows="13">
+render () {
+  const isLoggedIn = this.state.isLoggedIn
+  return (
+    <div>
+      {isLoggedIn ? (
+        <LogoutButton onClick={this.handleLogoutClick} />
+      ) : (
+        <LoginButton onClick={this.handleLoginClick} />
+      )}
+    </div>
+  )
+}
+          </textarea>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="../jquery-1.12.4/jquery.min.js"></script>
+  <script src="../mdl-1.2.1/material.min.js"></script>
+  <script src="../react-15.4.1/react.min.js"></script>
+  <script src="../react-dom-15.4.1/react-dom.min.js"></script>
+  <script src="../babel-6.21.1/babel.min.js"></script>
+
+  <script type="text/babel" id="script-greeting">
+  function UserGreeting(props) {
+    return <h4>欢迎回来</h4>;
+  }
+
+  function GuestGreeting(props) {
+    return <h4>请登录</h4>;
+  }
+
+  function Greeting(props) {
+    const isLoggedIn = props.isLoggedIn;
+    if (isLoggedIn) {
+      return <UserGreeting />;
+    }
+    return <GuestGreeting />;
+  }
+
+  ReactDOM.render(
+    // <Greeting isLoggedIn={true} />,
+    <Greeting isLoggedIn={false} />,
+    document.getElementById('result-greeting')
+  );
+  </script>
+  <script type="text/babel" id="script-login-control">
+  function LoginButton(props) {
+    return (
+      <button onClick={props.onClick} className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+        登录
+      </button>
+    )
+  }
+
+  function LogoutButton(props) {
+    return (
+      <button onClick={props.onClick} className="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">
+        退出登录
+      </button>
+    )
+  }
+
+  class LoginControl extends React.Component {
+    constructor(props) {
+      super(props)
+      this.handleLoginClick = this.handleLoginClick.bind(this)
+      this.handleLogoutClick = this.handleLogoutClick.bind(this)
+      this.state = {isLoggedIn: false}
+    }
+
+    handleLoginClick() {
+      console.log('login')
+      this.setState({isLoggedIn: true})
+    }
+
+    handleLogoutClick() {
+      console.log('logout')
+      this.setState({isLoggedIn: false})
+    }
+
+    render() {
+      const isLoggedIn = this.state.isLoggedIn
+      let button = null
+      if (isLoggedIn) {
+        button = <LogoutButton onClick={this.handleLogoutClick} />
+      } else {
+        button = <LoginButton onClick={this.handleLoginClick} />
+      }
+      return (
+        <div>
+          <Greeting isLoggedIn={isLoggedIn} />
+          {button}
+        </div>
+      )
+    }
+  }
+
+  ReactDOM.render(
+    <LoginControl />,
+    document.getElementById('result-login-control')
+  )
+  </script>
+  <script type="text/babel" id="script-inline-if">
+  function Mailbox(props) {
+    const unreadMessages = props.unreadMessages
+    return (
+      <div>
+        <h4>你好</h4>
+        {unreadMessages.length > 0 &&
+          <h5>
+            你有 {unreadMessages.length} 条未读消息
+          </h5>
+        }
+      </div>
+    )
+  }
+
+  const messages = ['React', 'Re: React', 'Re:Re: React']
+  ReactDOM.render(
+    <Mailbox unreadMessages={messages} />,
+    document.getElementById('result-inline-if')
+  )
+  </script>
+  <script>
+  $('#code-inline-if').text($('#script-inline-if').html())
+  </script>
+</body>
+</html>
