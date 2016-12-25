@@ -38,6 +38,9 @@
         <div class="mdl-cell mdl-cell--3-col">
           <ul class="mdl-list">
             <li class="mdl-list__item"><a href="#title-element-variables">元素变量</a></li>
+            <li class="mdl-list__item"><a href="#title-inline-if">内嵌 if 判断</a></li>
+            <li class="mdl-list__item"><a href="#title-inline-if-else">内嵌 if-else 判断</a></li>
+            <li class="mdl-list__item"><a href="#title-preventing">阻止渲染组件</a></li>
           </ul>
         </div>
         <div class="mdl-cell mdl-cell--9-col">
@@ -141,7 +144,7 @@ ReactDOM.render(
           <h3>输出结果：</h3>
           <div id="result-login-control"></div>
           <hr />
-          <h3 id="title-inline-if">带有 && 逻辑操作符的内嵌 if 判断</h3>
+          <h2 id="title-inline-if">带有 && 逻辑操作符的内嵌 if 判断</h2>
           <textarea cols="80" rows="21" id="code-inline-if"></textarea>
           <br />
           输出结果：
@@ -173,6 +176,12 @@ render () {
   )
 }
           </textarea>
+          <hr />
+          <h2 id="title-preventing">阻止渲染组件</h2>
+          <textarea cols="80" rows="45" id="code-preventing"></textarea>
+          <br /><br />
+          <p>输出结果：</p>
+          <div id="result-preventing"></div>
         </div>
       </div>
     </main>
@@ -285,8 +294,55 @@ render () {
     document.getElementById('result-inline-if')
   )
   </script>
+
+  <script type="text/babel" id="script-preventing">
+  function WarningBanner(props) {
+    if (!props.warn) {
+      return null;
+    }
+
+    return (
+      <div className="warning">
+        警告
+      </div>
+    );
+  }
+
+  class Page extends React.Component {
+    constructor(props) {
+      super(props);
+      this.state = {showWarning: true}
+      this.handleToggleClick = this.handleToggleClick.bind(this);
+    }
+
+    handleToggleClick() {
+      this.setState(prevState => ({
+        showWarning: !prevState.showWarning
+      }));
+    }
+
+    render() {
+      return (
+        <div>
+          <WarningBanner warn={this.state.showWarning} />
+          <button onClick={this.handleToggleClick}
+               className="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">
+            {this.state.showWarning ? '隐藏' : '显示'}
+          </button>
+        </div>
+      );
+    }
+  }
+
+  ReactDOM.render(
+    <Page />,
+    document.getElementById('result-preventing')
+  );
+  </script>
+
   <script>
   $('#code-inline-if').text($('#script-inline-if').html())
+  $('#code-preventing').text($('#script-preventing').html())
   </script>
 </body>
 </html>
