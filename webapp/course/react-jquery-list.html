@@ -1,0 +1,114 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>临安</title>
+  <link rel="stylesheet" href="../mdl-1.2.1/material.min.css">
+</head>
+<body>
+  <div class="mdl-layout mdl-js-layout">
+    <header class="mdl-layout__header">
+      <div class="mdl-layout__header-row">
+        <span class="mdl-layout-title">临安</span>
+        <div class="mdl-layout-spacer"></div>
+        <nav class="mdl-navigation">
+          <a class="mdl-navigation__link" href="../index.html">首页</a>
+          <a class="mdl-navigation__link" href="../course.html">课程</a>
+          <a class="mdl-navigation__link" href="../document.html">文档</a>
+          <a class="mdl-navigation__link" href="../demo.html">演示</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="mdl-layout__content">
+      <div class="mdl-grid">
+        <div class="mdl-cell mdl-cell--12-col">
+          <h6>
+            位置：
+            <a href="index.html">首页</a>
+             /
+            <a href="../course.html">课程</a>
+             /
+            React 结合 jQuery 实例 2
+          </h6>
+        </div>
+      </div>
+      <div class="mdl-grid">
+        <div class="mdl-cell mdl-cell--3-col">
+          <ul class="mdl-list">
+            <li class="mdl-list__item"><a href="#title-user-list">用户列表</a></li>
+          </ul>
+        </div>
+        <div class="mdl-cell mdl-cell--9-col">
+          <h2 id="title-user-list">用户列表</h2>
+          <textarea cols="80" id="code-user-list"></textarea>
+          <br /><br />
+          <p>输出结果：</p>
+          <div id="result-user-list"></div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="../jquery-1.12.4/jquery.min.js"></script>
+  <script src="../mdl-1.2.1/material.min.js"></script>
+  <script src="../react-15.4.1/react.min.js"></script>
+  <script src="../react-dom-15.4.1/react-dom.min.js"></script>
+  <script src="../babel-6.21.1/babel.min.js"></script>
+
+  <script type="text/babel" id="script-user-list">
+  class UserList extends React.Component {
+    constructor(props) {
+      super(props)
+      this.state = {list: []}
+    }
+    componentDidMount() {
+      this.request = $.get(this.props.url, function (data) {
+        console.log(data)
+        this.setState({list: data})
+      }.bind(this))
+    }
+    componentWillUnmount() {
+      this.request.abort()
+    }
+    render() {
+      return (
+        <table className="mdl-data-table mdl-js-data-table mdl-shadow--4dp">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th className="mdl-data0table__cell--non-numeric">姓名</th>
+              <th className="mdl-data0table__cell--non-numeric">职称</th>
+              <th className="mdl-data0table__cell--non-numeric">标签</th>
+            </tr>
+          </thead>
+          <tbody>
+            {this.state.list.map((user) =>
+              <tr>
+                <td>{user.id}</td>
+                <td className="mdl-data-table__cell--non-numeric">{user.name}</td>
+                <td className="mdl-data-table__cell--non-numeric">{user.title}</td>
+                <td className="mdl-data-table__cell--non-numeric">{user.tag}</td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      )
+    }
+  }
+  ReactDOM.render(
+    <UserList url="/test-list" />,
+    document.getElementById('result-user-list')
+  )
+  </script>
+
+  <script>
+  $('#code-user-list').text($('#script-user-list').html())
+  $('#code-user-list').attr(
+    'rows',
+    $('#script-user-list').html().split(String.fromCharCode(10)).length
+  )
+  </script>
+</body>
+</html>
