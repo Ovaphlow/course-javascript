@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>临安</title>
   <link rel="stylesheet" href="../mdl-1.2.1/material.min.css">
-  <link rel="stylesheet" href="../highlight.js-9.9.0/styles/atom-one-dark.css">
+  <link rel="stylesheet" href="../highlight.js-9.9.0/styles/github.css">
 </head>
 <body>
   <div class="mdl-layout mdl-js-layout">
@@ -21,57 +21,3 @@
         </nav>
       </div>
     </header>
-
-    <main class="mdl-layout__content">
-      <div class="mdl-grid">
-        <div class="mdl-cell mdl-cell--12-col">
-          <h6>
-            位置：
-            <a href="../index.html">首页</a>
-             /
-            <a href="../course.html">课程</a>
-             /
-             Vue 2
-          </h6>
-        </div>
-      </div>
-      <div class="mdl-grid">
-        <div class="mdl-cell mdl-cell--3-col">
-          <ul class="mdl-list">
-            <li class="mdl-list__item"><a href="#title-hello-vue">声明式渲染</a></li>
-          </ul>
-        </div>
-        <div class="mdl-cell mdl-cell--9-col">
-          <h2 id="title-hello-vue">声明式渲染</h2>
-          <pre><code id="code-hello-vue"></code></pre>
-          <h3>运行结果</h3>
-          <div id="app">
-            {{message}}
-          </div>
-        </div>
-      </div>
-    </main>
-  </div>
-
-  <script src="../jquery-1.12.4/jquery.min.js"></script>
-  <script src="../mdl-1.2.1/material.min.js"></script>
-  <script src="../vue-2.1.8/vue.js"></script>
-  <script src="../highlight.js-9.9.0/highlight.pack.js"></script>
-  <script>
-  hljs.initHighlightingOnLoad()
-  </script>
-  <script id="script-hello-vue">
-  var app = new Vue({
-    el: '#app',
-    data: {
-      message: 'Hello Vue !'
-    }
-  })
-  </script>
-  <script>
-  $(function () {
-    $('#code-hello-vue').html($('#script-hello-vue').html())
-  })
-  </script>
-</body>
-</html>
