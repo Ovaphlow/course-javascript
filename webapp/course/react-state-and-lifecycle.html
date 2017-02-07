@@ -52,7 +52,7 @@ function Clock(props) {
   return (
     <div>
       <h1>Hello, world!</h1>
-      <h2>It is {props.date.toLocaleTimeString()}.</h2>
+      <h3>It is {props.date.toLocaleTimeString()}.</h2>
     </div>
   );
 }
@@ -74,7 +74,7 @@ setInterval(tick, 1000);
             首先，要在 Clock 中添加"state"（状态）。
           </p>
           <hr />
-          <h2 id="title-convert">转换代码</h2>
+          <h3 id="title-convert">转换代码</h2>
           <p>
             为了在 Clock 中添加状态，首先需要将 Clock 从 function 类型转换为 ES6 中的 Class 类型。
             代码如下：<br />
@@ -84,7 +84,7 @@ class Clock extends React.Component {
     return (
       <div>
         <h1>Hello, world!</h1>
-        <h2>It is {this.props.date.toLocaleTimeString()}.</h2>
+        <h3>It is {this.props.date.toLocaleTimeString()}.</h2>
       </div>
     );
   }
@@ -92,7 +92,7 @@ class Clock extends React.Component {
             </textarea>
           </p>
           <hr />
-          <h2 id="title-add-state">添加状态</h2>
+          <h3 id="title-add-state">添加状态</h2>
           <p>
             然后，将 Clock 类中的 props 换成 "state"（状态），代码如下：
             <textarea cols="80" rows="11">
@@ -101,7 +101,7 @@ class Clock extends React.Component {
     return (
       <div>
         <h1>Hello, world!</h1>
-        <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
+        <h3>It is {this.state.date.toLocaleTimeString()}.</h2>
       </div>
     );
   }
@@ -120,7 +120,7 @@ class Clock extends React.Component {
     return (
       <div>
         <h1>Hello, world!</h1>
-        <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
+        <h3>It is {this.state.date.toLocaleTimeString()}.</h2>
       </div>
     );
   }
@@ -139,7 +139,7 @@ class Clock extends React.Component {
     return (
       <div>
         <h1>Hello, world!</h1>
-        <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
+        <h3>It is {this.state.date.toLocaleTimeString()}.</h2>
       </div>
     );
   }
@@ -154,7 +154,7 @@ ReactDOM.render(
             下一步，我们要让 Clock 组件本身来每秒钟更新时间数据。
           </p>
           <hr />
-          <h2 id="title-lifecycle">添加生命周期</h2>
+          <h3 id="title-lifecycle">添加生命周期</h2>
           <p>
             当 Clock 组件第一次渲染为 DOM 时，需要初始化一个计时器，这个过程在 React 中叫做 "mounting"。<br />
             当 Clock 组件渲染出来的 DOM 被销毁时，需要清除计时器对象来释放程序所占用的资源，这个过程在 React 中叫做 "unmounting"。<br />
@@ -163,13 +163,13 @@ ReactDOM.render(
             <textarea cols="80" rows="39" id="code-final"></textarea>
           </p>
           <hr />
-          <h2 id="title-final">运行结果</h2>
+          <h3 id="title-final">运行结果</h2>
           <p>
             最后，这些代码的运行结果如下：<br />
             <div id="result-final"></div>
           </p>
           <hr />
-          <h2 id="title-state">状态用法</h2>
+          <h3 id="title-state">状态用法</h2>
           <h3>不能直接修改 state</h3>
           <p>
             错误的写法：<pre><code>this.state.comment = 'Hello';</code></pre>
