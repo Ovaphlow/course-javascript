@@ -4,8 +4,9 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>临安</title>
-  <link rel="stylesheet" href="../mdl-1.2.1/material.min.css">
-  <link rel="stylesheet" href="../highlight.js-9.9.0/styles/github.css">
+  <link rel="stylesheet" href="../mdl-1.2.1/material.min.css" />
+  <link rel="stylesheet" href="../highlight.js-9.9.0/styles/atom-one-dark.css" />
+  <link rel="stylesheet" href="../d3js/nv.d3.min.css" />
 </head>
 <body>
   <div class="mdl-layout mdl-js-layout">
@@ -48,9 +49,13 @@
           <pre><code id="code-data"></code></pre>
           <hr />
           <h3 id="title-render">渲染图形</h2>
-          <pre><code id="code-data"></code></pre>
+          <pre><code id="code-render"></code></pre>
           <p><br />结果</p>
-          <div id="result-render"></div>
+          <div id="result-render">
+            <p class="text-center">
+              <svg style="height:400px; width:100%"></svg>
+            </p>
+          </div>
         </div>
       </div>
     </main>
@@ -59,9 +64,11 @@
   <script src="../jquery-1.12.4/jquery.min.js"></script>
   <script src="../mdl-1.2.1/material.min.js"></script>
   <script src="../highlight.js-9.9.0/highlight.pack.js"></script>
+  <script src="../d3js/d3.v3.min.js"></script>
+  <script src="../d3js/nv.d3.min.js"></script>
 
   <script id="script-data">
-  function getExampleData() {
+  function exampleData() {
     return [
       {name: 'Type A', counter: 12},
       {name: 'Type B', counter: 11},
@@ -71,9 +78,28 @@
   }
   </script>
   <script>
-  hljs.initHighlightingOnLoad()
   $(function () {
+    hljs.initHighlightingOnLoad()
     $('#code-data').html($('#script-data').html())
+    $('#code-render').html($('#script-render').html())
+  })
+  </script>
+  <script id="script-render">
+  $(function () {
+    nv.addGraph(function() {
+      var chart = nv.models.pieChart()
+          .x(function(data) {
+            return data.name
+          }).y(function(data) {
+            return data.counter
+          }).showLabels(true)
+          .labelType('percent');
+      d3.select("#result-render svg")
+          .datum(exampleData())
+          .transition().duration(350)
+          .call(chart);
+      return chart;
+    });
   })
   </script>
 </body>
