@@ -88,9 +88,9 @@
   $(function () {
     nv.addGraph(function () {
       var chart = nv.models.pieChart()
-          .x(functioan (data) {
+          .x(function (data) {
             return data.name
-          }).y(functioan (data) {
+          }).y(function (data) {
             return data.counter
           }).showLabels(true)
           .labelType('percent');
